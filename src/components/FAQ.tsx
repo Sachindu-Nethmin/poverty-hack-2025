@@ -11,25 +11,25 @@ const items = [
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8">
+    <section className="py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10">
         <div>
-          <h3 className="text-2xl font-bold">Find Answers to Your Donation Questions</h3>
-          <p className="text-gray-600 mt-2">
-            We’ve compiled common questions to help you donate with confidence and clarity.
+          <h2 className="text-4xl font-bold tracking-tight">Find Answers to Your Donation Questions</h2>
+          <p className="text-gray-700 text-lg mt-4 leading-relaxed">
+            We've compiled common questions to help you donate with confidence and clarity.
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-4">
           {items.map((item, i) => (
-            <div key={item.q} className="border rounded-md">
+            <div key={item.q} className="border-2 rounded-lg">
               <button
-                className="w-full text-left px-4 py-3 font-medium hover:bg-gray-50"
+                className="w-full text-left px-6 py-4 font-semibold text-lg hover:bg-gray-50 transition-colors"
                 onClick={() => setOpen(open === i ? null : i)}
               >
                 {item.q}
               </button>
               {open === i && (
-                <div className="px-4 pb-4 text-sm text-gray-600">{item.a}</div>
+                <div className="px-6 pb-5 text-base text-gray-700 leading-relaxed">{item.a}</div>
               )}
             </div>
           ))}

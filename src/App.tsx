@@ -16,15 +16,25 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-white text-gray-900">
       <Header />
       <main className="flex-1">
-        <Hero />
+        <section id="home">
+          <Hero />
+        </section>
         <Stats />
         <Partners />
         <FeaturedCampaign />
-        <HowToStart />
-        <DonationGrid />
-        <FAQ />
+        <section id="how">
+          <HowToStart />
+        </section>
+        <section id="donations">
+          <DonationGrid />
+        </section>
+        <section id="faq">
+          <FAQ />
+        </section>
         <BlogList />
-        <Newsletter />
+        <section id="newsletter">
+          <Newsletter />
+        </section>
       </main>
       <Footer />
     </div>
