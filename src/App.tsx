@@ -1,6 +1,6 @@
 // src/App.tsx
 import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
@@ -16,6 +16,8 @@ const Newsletter = lazy(() => import("./components/Newsletter"));
 const Footer = lazy(() => import("./components/Footer"));
 const PaymentPage = lazy(() => import("./components/PaymentPage"));
 const HospitalNeedForm = lazy(() => import("./components/HospitalNeedForm"));
+const AdminUserRegistrationForm = lazy(() => import("./components/AdminUserRegistrationForm"));
+import EquipmentGrid, { demoItems } from "./components/EquipmentGrid";
 
 // Loading fallback component
 function LoadingSpinner() {
@@ -106,6 +108,43 @@ export default function App() {
           </Suspense>
         </div>
       } />
+      <Route path="/admin/register" element={
+        <div className="min-h-screen flex flex-col bg-white text-gray-900">
+          <Header />
+          <main className="flex-1">
+            <Suspense fallback={<LoadingSpinner />}>
+              <AdminUserRegistrationForm />
+            </Suspense>
+          </main>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Footer />
+          </Suspense>
+        </div>
+      } />
+      <Route path="/equipment" element={
+        <div className="min-h-screen flex flex-col bg-white text-gray-900">
+          <Header />
+          <main className="flex-1">
+            <Suspense fallback={<LoadingSpinner />}>
+              <EquipmentGridWrapper />
+            </Suspense>
+          </main>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Footer />
+          </Suspense>
+        </div>
+      } />
     </Routes>
+  );
+}
+
+// Small wrapper page to feed demo data into EquipmentGrid and wire Donate
+function EquipmentGridWrapper() {
+  const navigate = useNavigate();
+  return (
+    <EquipmentGrid
+      items={demoItems}
+      onDonateClick={(item) => navigate(`/payment/${item.id}`)}
+    />
   );
 }
