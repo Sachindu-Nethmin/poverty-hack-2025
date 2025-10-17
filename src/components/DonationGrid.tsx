@@ -1,79 +1,14 @@
 // src/components/DonationGrid.tsx
-import ct1Image from '../assets/CT1.jpg';
-import XrayImage from '../assets/X-ray.jpg';
-import bpImage from '../assets/BP.jpg';
-import glucometerImage from '../assets/Glucometer.jpg';
-import thermoImage from '../assets/thermo.jpg';
-import ultrasound1Image from '../assets/Ultrasound Scanner1.jpg';
-
-type Card = {
-  id: string;
-  title: string;
-  img: string;
-  raisedText: string;
-  goalAmount: string;
-  desc: string;
-  hospital: string;
-};
-
-const cards: Card[] = [
-  {
-    id: "1",
-    title: "CT Scanner for Emergency Diagnostics",
-    img: ct1Image,
-    raisedText: "LKR 2,450,000 raised",
-    goalAmount: "Goal: LKR 8,500,000",
-    desc: "Help us acquire a modern CT scanner for faster emergency diagnostics at Colombo General Hospital.",
-    hospital: "Colombo General Hospital",
-  },
-  {
-    id: "2",
-    title: "Digital X-Ray Machine",
-    img: XrayImage,
-    raisedText: "LKR 1,820,000 raised",
-    goalAmount: "Goal: LKR 4,200,000",
-    desc: "Support the procurement of a digital X-ray machine for accurate imaging at Kandy Teaching Hospital.",
-    hospital: "Kandy Teaching Hospital",
-  },
-  {
-    id: "3",
-    title: "Blood Pressure Monitors",
-    img: bpImage,
-    raisedText: "LKR 125,000 raised",
-    goalAmount: "Goal: LKR 350,000",
-    desc: "Provide automated BP monitors for the cardiology ward at Galle District Hospital.",
-    hospital: "Galle District Hospital",
-  },
-  {
-    id: "4",
-    title: "Glucometers for Diabetes Care",
-    img: glucometerImage,
-    raisedText: "LKR 85,000 raised",
-    goalAmount: "Goal: LKR 200,000",
-    desc: "Help diabetic patients with accurate monitoring devices at Jaffna Teaching Hospital.",
-    hospital: "Jaffna Teaching Hospital",
-  },
-  {
-    id: "5",
-    title: "Digital Thermometers",
-    img: thermoImage,
-    raisedText: "LKR 45,000 raised",
-    goalAmount: "Goal: LKR 120,000",
-    desc: "Equip pediatric wards with contactless thermometers at Anuradhapura General Hospital.",
-    hospital: "Anuradhapura General Hospital",
-  },
-  {
-    id: "6",
-    title: "Ultrasound Scanner for Maternity Ward",
-    img: ultrasound1Image,
-    raisedText: "LKR 3,200,000 raised",
-    goalAmount: "Goal: LKR 6,800,000",
-    desc: "Support safe pregnancies with advanced ultrasound equipment at Batticaloa Hospital.",
-    hospital: "Batticaloa Hospital",
-  },
-];
+import { useNavigate } from 'react-router-dom';
+import { equipmentData, formatCurrency, calculateProgress } from '../data/equipmentData';
 
 export default function DonationGrid() {
+  const navigate = useNavigate();
+
+  const handleDonateClick = (equipmentId: string) => {
+    navigate(`/payment/${equipmentId}`);
+  };
+
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,39 +17,49 @@ export default function DonationGrid() {
           Every donation brings us closer to providing essential medical equipment that saves lives across Sri Lankan hospitals.
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cards.map((c) => (
-            <article key={c.id} className="flex flex-col rounded-2xl border-2 bg-white shadow-md overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1 duration-300 h-full">
-              <div className="h-56 w-full overflow-hidden bg-gray-100 flex-shrink-0">
-                <img className="w-full h-full object-cover" src={c.img} alt={c.title} />
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-sm text-emerald-600 font-bold">{c.raisedText}</p>
-                  <p className="text-xs text-gray-500 font-semibold">{c.goalAmount}</p>
+          {equipmentData.map((equipment) => {
+            const progress = calculateProgress(equipment.raised, equipment.goal);
+            
+            return (
+              <article key={equipment.id} className="flex flex-col rounded-2xl border-2 bg-white shadow-md overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1 duration-300 h-full">
+                <div className="h-56 w-full overflow-hidden bg-gray-100 flex-shrink-0">
+                  <img 
+                    className="w-full h-full object-cover" 
+                    src={equipment.img} 
+                    alt={equipment.title}
+                    loading="lazy"
+                  />
                 </div>
-                <h4 className="font-bold text-xl mt-2 text-gray-900 leading-tight">{c.title}</h4>
-                <p className="text-sm text-emerald-700 font-semibold mt-2 flex items-center gap-1">
-                  <span className="inline-block w-2 h-2 bg-emerald-600 rounded-full"></span>
-                  {c.hospital}
-                </p>
-                <p className="text-base text-gray-600 mt-3 leading-relaxed flex-grow">{c.desc}</p>
-                
-                {/* Progress bar */}
-                <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5 flex-shrink-0">
-                  <div 
-                    className="bg-emerald-600 h-2.5 rounded-full transition-all duration-500"
-                    style={{ 
-                      width: `${Math.min((parseInt(c.raisedText.replace(/[^\d]/g, '')) / parseInt(c.goalAmount.replace(/[^\d]/g, ''))) * 100, 100)}%` 
-                    }}
-                  ></div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-sm text-emerald-600 font-bold">{formatCurrency(equipment.raised)} raised</p>
+                    <p className="text-xs text-gray-500 font-semibold">Goal: {formatCurrency(equipment.goal)}</p>
+                  </div>
+                  <h4 className="font-bold text-xl mt-2 text-gray-900 leading-tight">{equipment.title}</h4>
+                  <p className="text-sm text-emerald-700 font-semibold mt-2 flex items-center gap-1">
+                    <span className="inline-block w-2 h-2 bg-emerald-600 rounded-full"></span>
+                    {equipment.hospital}
+                  </p>
+                  <p className="text-base text-gray-600 mt-3 leading-relaxed flex-grow">{equipment.desc}</p>
+                  
+                  {/* Progress bar */}
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5 flex-shrink-0">
+                    <div 
+                      className="bg-emerald-600 h-2.5 rounded-full transition-all duration-500"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                  
+                  <button 
+                    onClick={() => handleDonateClick(equipment.id)}
+                    className="mt-5 w-full rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-3.5 text-base font-bold hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] flex-shrink-0"
+                  >
+                    Donate Now
+                  </button>
                 </div>
-                
-                <button className="mt-5 w-full rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-3.5 text-base font-bold hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] flex-shrink-0">
-                  Donate Now
-                </button>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

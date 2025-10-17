@@ -1,5 +1,7 @@
 // src/components/Hero.tsx
 import heroImage from '../assets/hero.png';
+import machineImage from '../assets/machine.png';
+import machine2Image from '../assets/machine3.png';
 
 export default function Hero() {
   return (
@@ -18,12 +20,7 @@ export default function Hero() {
             supplies so your donation reaches the bedside quickly.
           </p>
           <div className="mt-8 flex items-center gap-4">
-            <a
-              href="#donations"
-              className="px-8 py-4 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 text-base font-semibold transition-colors"
-            >
-              Donate Now
-            </a>
+          
             <a
               href="#how"
               className="px-8 py-4 rounded-md border-2 text-base font-semibold hover:bg-gray-50 transition-colors"
@@ -42,6 +39,7 @@ export default function Hero() {
                 className="w-full h-full object-cover object-center"
                 src={heroImage}
                 alt="Care"
+                loading="eager"
               />
             </div>
             <div className="p-6">
@@ -74,12 +72,13 @@ export default function Hero() {
             <div className="h-40 w-full overflow-hidden">
               <img
                 className="w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"
-                alt="Ward"
+                src={machineImage}
+                alt="Medical Machine"
+                loading="lazy"
               />
             </div>
             <div className="p-5">
-              <p className="text-xs text-gray-500 font-medium">$250 needed</p>
+              <p className="text-xs text-gray-500 font-medium">LKR 92,500 needed</p>
               <h3 className="font-semibold">Buy Consumables for NICU</h3>
               <button className="mt-4 w-full rounded-md bg-emerald-600 text-white py-2 text-sm hover:bg-emerald-700">
                 Donate
@@ -91,12 +90,13 @@ export default function Hero() {
             <div className="h-40 w-full overflow-hidden">
               <img
                 className="w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1580281657527-47d5aa4c1c4a?q=80&w=1200&auto=format&fit=crop"
-                alt="Lab"
+                src={machine2Image}
+                alt="Laboratory Equipment"
+                loading="lazy"
               />
             </div>
             <div className="p-5">
-              <p className="text-xs text-gray-500 font-medium">$1,200 needed</p>
+              <p className="text-xs text-gray-500 font-medium">LKR 444,000 needed</p>
               <h3 className="font-semibold">Repair Centrifuge – Lab</h3>
               <button className="mt-4 w-full rounded-md bg-emerald-600 text-white py-2 text-sm hover:bg-emerald-700">
                 Donate

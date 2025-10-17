@@ -44,6 +44,7 @@ export default function Partners() {
                     src={partner.logo}
                     alt={`${partner.name} logo`}
                     className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-10"
+                    loading="lazy"
                   />
                 </div>
                 <p className="text-xl font-bold text-gray-800 text-center">
