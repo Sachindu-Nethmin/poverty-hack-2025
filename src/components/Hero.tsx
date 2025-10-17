@@ -7,17 +7,16 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-emerald-50 via-white to-amber-50" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-12 gap-10">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-12 gap-10 items-start">
         {/* Left copy */}
-        <div className="lg:col-span-6 flex flex-col justify-center">
-          <p className="text-emerald-700 font-bold mb-3 text-lg tracking-wide">Give Help, Get Hope.</p>
+  <div className="lg:col-span-6 flex flex-col justify-start">
+          <p className="text-emerald-700 font-bold mb-3 text-lg tracking-wide">Give Health.Give Hope.</p>
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
             Your Trusted Source for Sri Lanka's Public Health
           </h1>
           <p className="mt-6 text-gray-700 text-lg leading-relaxed max-w-prose">
-            Join us to fund urgent medical needs across Sri Lankan hospitals.
-            We publish verified requests like broken machines and critical
-            supplies so your donation reaches the bedside quickly.
+            Unlock Healing for All. Donate to equip hospitals and centers 
+            with the essential resources needed to serve every single patient who needs help.
           </p>
           <div className="mt-8 flex items-center gap-4">
           
@@ -34,13 +33,16 @@ export default function Hero() {
         <div className="lg:col-span-6 grid gap-4 sm:grid-cols-2">
           {/* Primary big card */}
           <article className="sm:col-span-2 rounded-2xl border shadow-sm overflow-hidden bg-white">
-            <div className="h-64 w-full overflow-hidden">
+            <div className="h-64 w-full overflow-hidden relative group">
               <img
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-110"
                 src={heroImage}
                 alt="Care"
                 loading="eager"
               />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
+                <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_top,black_70%,transparent_100%)]"></div>
+              </div>
             </div>
             <div className="p-6">
               <div className="flex items-center justify-between mb-2">
@@ -67,15 +69,17 @@ export default function Hero() {
             </div>
           </article>
 
-          {/* Small side card */}
+          {/* Small side card
           <article className="rounded-2xl border shadow-sm overflow-hidden bg-white">
-            <div className="h-40 w-full overflow-hidden">
+            <div className="h-40 w-full overflow-hidden relative group">
               <img
-                className="w-full h-full object-cover"
-                src={machineImage}
-                alt="Medical Machine"
-                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                src={nicu}
+                alt="Ward"
               />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
+                <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_top,black_70%,transparent_100%)]"></div>
+              </div>
             </div>
             <div className="p-5">
               <p className="text-xs text-gray-500 font-medium">LKR 92,500 needed</p>
@@ -87,13 +91,15 @@ export default function Hero() {
           </article>
 
           <article className="rounded-2xl border shadow-sm overflow-hidden bg-white">
-            <div className="h-40 w-full overflow-hidden">
+            <div className="h-40 w-full overflow-hidden relative group">
               <img
-                className="w-full h-full object-cover"
-                src={machine2Image}
-                alt="Laboratory Equipment"
-                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                src={Centr}
+                alt="Lab"
               />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
+                <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_top,black_70%,transparent_100%)]"></div>
+              </div>
             </div>
             <div className="p-5">
               <p className="text-xs text-gray-500 font-medium">LKR 444,000 needed</p>
@@ -102,7 +108,7 @@ export default function Hero() {
                 Donate
               </button>
             </div>
-          </article>
+          </article> */}
         </div>
       </div>
     </section>
