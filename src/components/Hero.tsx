@@ -37,12 +37,13 @@ export default function Hero() {
         <div className="lg:col-span-6 grid gap-4 sm:grid-cols-2">
           {/* Primary big card */}
           <article className="sm:col-span-2 rounded-2xl border shadow-sm overflow-hidden bg-white">
-            <div className="h-64 w-full overflow-hidden">
+            <div className="h-64 w-full overflow-hidden relative group">
               <img
                 className="w-full h-full object-cover object-center"
                 src={heroImage}
                 alt="Care"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             <div className="p-6">
               <div className="flex items-center justify-between mb-2">
@@ -71,12 +72,13 @@ export default function Hero() {
 
           {/* Small side card */}
           <article className="rounded-2xl border shadow-sm overflow-hidden bg-white">
-            <div className="h-40 w-full overflow-hidden">
+            <div className="h-40 w-full overflow-hidden relative group">
               <img
                 className="w-full h-full object-cover"
                 src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"
                 alt="Ward"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             <div className="p-5">
               <p className="text-xs text-gray-500 font-medium">$250 needed</p>
@@ -88,12 +90,13 @@ export default function Hero() {
           </article>
 
           <article className="rounded-2xl border shadow-sm overflow-hidden bg-white">
-            <div className="h-40 w-full overflow-hidden">
+            <div className="h-40 w-full overflow-hidden relative group">
               <img
                 className="w-full h-full object-cover"
                 src="https://images.unsplash.com/photo-1580281657527-47d5aa4c1c4a?q=80&w=1200&auto=format&fit=crop"
                 alt="Lab"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
             <div className="p-5">
               <p className="text-xs text-gray-500 font-medium">$1,200 needed</p>
