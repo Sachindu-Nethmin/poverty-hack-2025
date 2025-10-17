@@ -37,8 +37,9 @@ export default function Stats() {
   }, [hasAnimated]);
 
   return (
-    <section ref={sectionRef} className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="py-16 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/80 via-blue-50/60 to-amber-50/80"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
           {items.map((s, index) => (
             <StatCard
@@ -85,20 +86,22 @@ function StatCard({ item, delay, animate }: { item: StatItem; delay: number; ani
 
   return (
     <div
-      className={`flex-1 min-w-[280px] max-w-[350px] rounded-2xl border-2 border-emerald-100 bg-white p-10 text-center shadow-lg hover:shadow-xl transition-all duration-700 ${
+      className={`flex-1 min-w-[280px] max-w-[350px] rounded-2xl border border-white/40 backdrop-blur-lg p-10 text-center shadow-xl hover:shadow-2xl hover:bg-white/40 hover:border-white/60 transition-all duration-700 ${
         animate ? "opacity-100 rotate-0" : "opacity-0 rotate-y-90"
       }`}
       style={{
         transform: animate ? "rotateY(0deg)" : "rotateY(90deg)",
         transformStyle: "preserve-3d",
         transitionDelay: `${delay}ms`,
+        background: "0 8px 32px 0 rgba(25, 59, 36, 0.15)",
+        boxShadow: "0 8px 32px 0 rgba(19, 34, 23, 0.42)",
       }}
     >
-      <div className="text-6xl font-bold text-emerald-600 mb-3 tracking-tight">
+      <div className="text-6xl font-bold text-emerald-600 mb-3 tracking-tight drop-shadow-sm">
         {count}
         {item.suffix}
       </div>
-      <div className="text-lg font-semibold text-gray-700 tracking-wide">{item.label}</div>
+      <div className="text-lg font-semibold text-gray-800 tracking-wide">{item.label}</div>
     </div>
   );
 }
