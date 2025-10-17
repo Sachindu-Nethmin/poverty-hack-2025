@@ -1,6 +1,6 @@
 // src/components/DonationGrid.tsx
 import ct1Image from '../assets/CT1.jpg';
-import ct2Image from '../assets/CT2.jpg';
+import XrayImage from '../assets/X-ray.jpg';
 import bpImage from '../assets/BP.jpg';
 import glucometerImage from '../assets/Glucometer.jpg';
 import thermoImage from '../assets/thermo.jpg';
@@ -29,7 +29,7 @@ const cards: Card[] = [
   {
     id: "2",
     title: "Digital X-Ray Machine",
-    img: ct2Image,
+    img: XrayImage,
     raisedText: "LKR 1,820,000 raised",
     goalAmount: "Goal: LKR 4,200,000",
     desc: "Support the procurement of a digital X-ray machine for accurate imaging at Kandy Teaching Hospital.",
@@ -83,11 +83,11 @@ export default function DonationGrid() {
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((c) => (
-            <article key={c.id} className="rounded-2xl border-2 bg-white shadow-md overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1 duration-300">
-              <div className="h-56 w-full overflow-hidden bg-gray-100">
+            <article key={c.id} className="flex flex-col rounded-2xl border-2 bg-white shadow-md overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1 duration-300 h-full">
+              <div className="h-56 w-full overflow-hidden bg-gray-100 flex-shrink-0">
                 <img className="w-full h-full object-cover" src={c.img} alt={c.title} />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-sm text-emerald-600 font-bold">{c.raisedText}</p>
                   <p className="text-xs text-gray-500 font-semibold">{c.goalAmount}</p>
@@ -97,19 +97,19 @@ export default function DonationGrid() {
                   <span className="inline-block w-2 h-2 bg-emerald-600 rounded-full"></span>
                   {c.hospital}
                 </p>
-                <p className="text-base text-gray-600 mt-3 leading-relaxed">{c.desc}</p>
+                <p className="text-base text-gray-600 mt-3 leading-relaxed flex-grow">{c.desc}</p>
                 
                 {/* Progress bar */}
-                <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5 flex-shrink-0">
                   <div 
-                    className="bg-emerald-600 h-2 rounded-full transition-all duration-500"
+                    className="bg-emerald-600 h-2.5 rounded-full transition-all duration-500"
                     style={{ 
                       width: `${Math.min((parseInt(c.raisedText.replace(/[^\d]/g, '')) / parseInt(c.goalAmount.replace(/[^\d]/g, ''))) * 100, 100)}%` 
                     }}
                   ></div>
                 </div>
                 
-                <button className="mt-5 w-full rounded-md bg-emerald-600 text-white py-3 text-base font-semibold hover:bg-emerald-700 transition-colors shadow-sm">
+                <button className="mt-5 w-full rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-3.5 text-base font-bold hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] flex-shrink-0">
                   Donate Now
                 </button>
               </div>
