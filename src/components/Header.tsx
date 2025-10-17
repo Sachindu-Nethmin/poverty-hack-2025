@@ -72,7 +72,7 @@ export default function Header() {
             Sign in
           </button>
           <button 
-            onClick={() => navigate('/payment/ct-scanner')}
+            onClick={() => navigate('/submit-need')}
             className="inline-flex px-5 py-2.5 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 text-base font-semibold transition-colors cursor-pointer"
           >
             Donate

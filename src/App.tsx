@@ -15,6 +15,7 @@ const BlogList = lazy(() => import("./components/BlogList"));
 const Newsletter = lazy(() => import("./components/Newsletter"));
 const Footer = lazy(() => import("./components/Footer"));
 const PaymentPage = lazy(() => import("./components/PaymentPage"));
+const HospitalNeedForm = lazy(() => import("./components/HospitalNeedForm"));
 
 // Loading fallback component
 function LoadingSpinner() {
@@ -85,6 +86,19 @@ export default function App() {
           <main className="flex-1">
             <Suspense fallback={<LoadingSpinner />}>
               <PaymentPage />
+            </Suspense>
+          </main>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Footer />
+          </Suspense>
+        </div>
+      } />
+      <Route path="/submit-need" element={
+        <div className="min-h-screen flex flex-col bg-white text-gray-900">
+          <Header />
+          <main className="flex-1">
+            <Suspense fallback={<LoadingSpinner />}>
+              <HospitalNeedForm />
             </Suspense>
           </main>
           <Suspense fallback={<LoadingSpinner />}>
