@@ -1,4 +1,17 @@
 import type { HospitalNeedRequest } from '../types/request';
+import ultrasound1Image from '../assets/Ultrasound Scanner1.jpg';
+import mriScannerImage from '../assets/MRI Scanner.png';
+import ventilatorsImage from '../assets/Ventilators.png';
+import dialysisImage from '../assets/Dialysis Machines.png';
+import xrayImage from '../assets/X-ray.jpg';
+import patientMonitorsImage from '../assets/Patient Monitors.png';
+import surgicalLightsImage from '../assets/Surgical Lights.png';
+import defibrillatorsImage from '../assets/Defibrillators.png';
+import oxygenImage from '../assets/Oxygen.png';
+import ecgImage from '../assets/ECG .png';
+import operatingTablesImage from '../assets/Operating Tables.png';
+import ct1Image from '../assets/CT1.jpg';
+import ct2Image from '../assets/CT2.jpg';
 
 export const ministryDummyRequests: HospitalNeedRequest[] = [
   {
@@ -7,6 +20,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Colombo',
     equipmentName: 'MRI Scanner',
     equipmentCategory: 'Diagnostic Equipment',
+    img: mriScannerImage,
     quantity: 2,
     estimatedCost: 45000000,
     urgency: 'critical',
@@ -26,6 +40,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Kandy',
     equipmentName: 'Ventilators',
     equipmentCategory: 'Life Support',
+    img: ventilatorsImage,
     quantity: 10,
     estimatedCost: 15000000,
     urgency: 'critical',
@@ -45,6 +60,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Galle',
     equipmentName: 'Dialysis Machines',
     equipmentCategory: 'Treatment Equipment',
+    img: dialysisImage,
     quantity: 5,
     estimatedCost: 8500000,
     urgency: 'high',
@@ -64,6 +80,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Jaffna',
     equipmentName: 'X-Ray Machine',
     equipmentCategory: 'Diagnostic Equipment',
+    img: xrayImage,
     quantity: 1,
     estimatedCost: 3500000,
     urgency: 'medium',
@@ -83,6 +100,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Anuradhapura',
     equipmentName: 'Patient Monitors',
     equipmentCategory: 'Monitoring Equipment',
+    img: patientMonitorsImage,
     quantity: 20,
     estimatedCost: 4000000,
     urgency: 'high',
@@ -101,6 +119,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalName: 'Kurunegala Teaching Hospital',
     hospitalDistrict: 'Kurunegala',
     equipmentName: 'Surgical Lights',
+    img: surgicalLightsImage,
     equipmentCategory: 'Surgical Equipment',
     quantity: 8,
     estimatedCost: 2400000,
@@ -121,6 +140,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Batticaloa',
     equipmentName: 'Ultrasound Machine',
     equipmentCategory: 'Diagnostic Equipment',
+    img: ultrasound1Image,
     quantity: 2,
     estimatedCost: 5000000,
     urgency: 'high',
@@ -140,6 +160,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Ratnapura',
     equipmentName: 'Defibrillators',
     equipmentCategory: 'Emergency Equipment',
+    img: defibrillatorsImage,
     quantity: 6,
     estimatedCost: 1800000,
     urgency: 'critical',
@@ -159,6 +180,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Badulla',
     equipmentName: 'Laboratory Analyzer',
     equipmentCategory: 'Laboratory Equipment',
+    img: ct1Image,
     quantity: 1,
     estimatedCost: 6500000,
     urgency: 'medium',
@@ -178,6 +200,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Matara',
     equipmentName: 'Infusion Pumps',
     equipmentCategory: 'Treatment Equipment',
+    img: patientMonitorsImage,
     quantity: 15,
     estimatedCost: 2250000,
     urgency: 'high',
@@ -197,6 +220,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Trincomalee',
     equipmentName: 'ECG Machine',
     equipmentCategory: 'Diagnostic Equipment',
+    img: ecgImage,
     quantity: 3,
     estimatedCost: 900000,
     urgency: 'low',
@@ -216,6 +240,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Polonnaruwa',
     equipmentName: 'Oxygen Concentrators',
     equipmentCategory: 'Life Support',
+    img: oxygenImage,
     quantity: 12,
     estimatedCost: 1800000,
     urgency: 'critical',
@@ -235,6 +260,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Ampara',
     equipmentName: 'Sterilization Equipment',
     equipmentCategory: 'Surgical Equipment',
+    img: ct2Image,
     quantity: 2,
     estimatedCost: 4500000,
     urgency: 'medium',
@@ -254,6 +280,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Puttalam',
     equipmentName: 'Operating Tables',
     equipmentCategory: 'Surgical Equipment',
+    img: operatingTablesImage,
     quantity: 3,
     estimatedCost: 5400000,
     urgency: 'high',
@@ -273,6 +300,7 @@ export const ministryDummyRequests: HospitalNeedRequest[] = [
     hospitalDistrict: 'Kalutara',
     equipmentName: 'Neonatal Incubators',
     equipmentCategory: 'Pediatric Equipment',
+    img: patientMonitorsImage,
     quantity: 8,
     estimatedCost: 6400000,
     urgency: 'critical',

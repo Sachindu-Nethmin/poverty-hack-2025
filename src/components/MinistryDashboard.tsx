@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Footer from './Footer';
-import logo from '../assets/Sri_Lanka.svg';
+import logo from '../assets/logo .png';
 import { ministryDummyRequests } from '../data/ministryDummyData';
 
 export default function MinistryDashboard() {
@@ -142,12 +142,12 @@ export default function MinistryDashboard() {
           <Link to="/" className="flex items-center gap-3 group">
             <img 
               src={logo} 
-              alt="Sri Lanka Health Logo" 
+              alt="Hope4ever Logo" 
               className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <span className="font-bold text-xl text-gray-900">Public Health Portal</span>
-              <span className="text-xs text-emerald-600 font-semibold">Ministry of Health, Sri Lanka</span>
+              <span className="font-bold text-xl text-gray-900">Hope4ever</span>
+              <span className="text-xs text-emerald-600 font-semibold">Give health, Get Hope</span>
             </div>
           </Link>
           
@@ -160,11 +160,11 @@ export default function MinistryDashboard() {
               <span className="font-medium">Home</span>
             </Link>
             
-            <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-lg border border-blue-200">
-              <ShieldCheck className="w-4 h-4 text-blue-700" />
+            <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 rounded-lg border border-emerald-200">
+              <ShieldCheck className="w-4 h-4 text-emerald-700" />
               <div className="flex flex-col">
-                <span className="text-xs font-semibold text-blue-900">{user?.name}</span>
-                <span className="text-[10px] text-blue-600">Ministry Officer</span>
+                <span className="text-xs font-semibold text-emerald-900">{user?.name}</span>
+                <span className="text-[10px] text-emerald-600">Ministry Officer</span>
               </div>
             </div>
             
@@ -183,7 +183,7 @@ export default function MinistryDashboard() {
       </header>
 
       {/* Dashboard Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <div className="bg-gradient-to-r from-emerald-600 to-green-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
             <div>
@@ -191,7 +191,7 @@ export default function MinistryDashboard() {
                 <ShieldCheck className="w-10 h-10" />
                 Health Ministry Dashboard
               </h1>
-              <p className="text-blue-100 mt-2">
+              <p className="text-emerald-100 mt-2">
                 {user?.name} • Ministry of Health, Sri Lanka
               </p>
             </div>
@@ -256,7 +256,7 @@ export default function MinistryDashboard() {
           {/* Requests by Hospital */}
           <div className="bg-white p-6 rounded-xl shadow-lg">
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-blue-600" />
+              <TrendingUp className="w-5 h-5 text-emerald-600" />
               Top 5 Hospitals by Requests
             </h3>
             <ResponsiveContainer width="100%" height={250}>
@@ -265,7 +265,7 @@ export default function MinistryDashboard() {
                 <XAxis dataKey="hospital" angle={-45} textAnchor="end" height={100} />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="requests" fill="#3b82f6" />
+                <Bar dataKey="requests" fill="#10b981" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -273,7 +273,7 @@ export default function MinistryDashboard() {
           {/* Requests by Urgency */}
           <div className="bg-white p-6 rounded-xl shadow-lg">
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-orange-600" />
+              <AlertTriangle className="w-5 h-5 text-emerald-600" />
               Requests by Urgency Level
             </h3>
             <ResponsiveContainer width="100%" height={250}>
@@ -282,7 +282,7 @@ export default function MinistryDashboard() {
                 <XAxis dataKey="urgency" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="count" fill="#f59e0b" />
+                <Bar dataKey="count" fill="#059669" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -298,8 +298,8 @@ export default function MinistryDashboard() {
                 onClick={() => setFilterStatus(status)}
                 className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                   filterStatus === status
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:border-blue-600 hover:text-blue-600'
+                    ? 'bg-emerald-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:border-emerald-600 hover:text-emerald-600'
                 }`}
               >
                 {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -332,7 +332,7 @@ export default function MinistryDashboard() {
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden border border-gray-200"
               >
                 {/* Card Header */}
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 border-b border-blue-200">
+                <div className="bg-gradient-to-r from-emerald-50 to-green-100 p-4 border-b border-emerald-200">
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="font-bold text-gray-900 text-lg line-clamp-1">
                       {request.hospitalName}
@@ -344,6 +344,17 @@ export default function MinistryDashboard() {
                     {request.hospitalDistrict}
                   </p>
                 </div>
+
+                {/* Equipment Image */}
+                {request.img && (
+                  <div className="w-full h-48 bg-gray-100 overflow-hidden">
+                    <img
+                      src={request.img}
+                      alt={request.equipmentName}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
 
                 {/* Card Body */}
                 <div className="p-4">
@@ -384,7 +395,7 @@ export default function MinistryDashboard() {
                   {/* View Request Button */}
                   <button
                     onClick={() => navigate(`/admin/requests/${request.id}`)}
-                    className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow hover:shadow-lg"
+                    className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow hover:shadow-lg"
                   >
                     <Eye className="w-5 h-5" />
                     View Request

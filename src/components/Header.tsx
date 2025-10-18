@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import LoginModal from './LoginModal';
 import SignupModal from './SignupModal';
 import { User, LogOut, LayoutDashboard } from 'lucide-react';
-import logo from '../assets/Sri_Lanka.svg';
+import logo from '../assets/logo .png';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -51,8 +51,8 @@ export default function Header() {
             className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
           />
           <div className="flex flex-col">
-            <span className="font-bold text-xl text-gray-900">Public Health Portal</span>
-            <span className="text-xs text-emerald-600 font-semibold">Ministry of Health, Sri Lanka</span>
+            <span className="font-bold text-xl text-gray-900">Hope4ever</span>
+            <span className="text-xs text-emerald-600 font-semibold">Give health,Get Hope</span>
           </div>
         </Link>
 

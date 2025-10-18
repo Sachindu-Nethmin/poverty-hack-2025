@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import type { UserRole } from '../types/auth';
 import { Building2, ShieldCheck, Heart, Eye, EyeOff } from 'lucide-react';
-import logo from '../assets/Sri_Lanka.svg';
+import logo from '../assets/logo .png';
 
 type AuthMode = 'signin' | 'signup';
 
@@ -143,15 +143,15 @@ export default function AuthLandingPage() {
           <div className="inline-flex items-center gap-4 mb-4">
             <img 
               src={logo} 
-              alt="Sri Lanka Health" 
+              alt="Hope4ever Logo" 
               className="h-20 w-20 object-contain"
             />
             <div className="text-left">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                Public Health Support Portal
+                Hope4ever
               </h1>
               <p className="text-emerald-600 font-semibold text-sm md:text-base">
-                Ministry of Health, Sri Lanka
+                Give health, Get Hope
               </p>
             </div>
           </div>

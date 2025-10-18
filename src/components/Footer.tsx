@@ -1,5 +1,5 @@
 // src/components/Footer.tsx
-import logo from '../assets/Sri_Lanka.svg';
+import logo from '../assets/logo .png';
 
 export default function Footer() {
   return (
@@ -11,12 +11,12 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <img 
               src={logo} 
-              alt="Sri Lanka Health Logo" 
+              alt="Hope4ever Logo" 
               className="h-16 w-16 object-contain"
             />
             <div className="text-center md:text-left">
-              <span className="font-bold text-2xl text-gray-900 block">Public Health Support Portal</span>
-              <span className="text-sm text-emerald-600 font-semibold">Ministry of Health, Sri Lanka</span>
+              <span className="font-bold text-2xl text-gray-900 block">Hope4ever</span>
+              <span className="text-sm text-emerald-600 font-semibold">Give health, Get Hope</span>
             </div>
           </div>
 

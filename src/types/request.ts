@@ -18,6 +18,7 @@ export interface HospitalNeedRequest {
   quantity: number;
   estimatedCost: number;
   urgency: UrgencyLevel;
+  img?: string; // Equipment image
   
   // Request Details
   description: string;

@@ -5,6 +5,40 @@ import { equipmentData, formatCurrency, calculateProgress } from '../data/equipm
 import type { HospitalNeedRequest } from '../types/request';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 
+// Import all equipment images
+import mriScannerImage from '../assets/MRI Scanner.png';
+import ventilatorsImage from '../assets/Ventilators.png';
+import dialysisImage from '../assets/Dialysis Machines.png';
+import xrayImage from '../assets/X-ray.jpg';
+import patientMonitorsImage from '../assets/Patient Monitors.png';
+import surgicalLightsImage from '../assets/Surgical Lights.png';
+import ultrasound1Image from '../assets/Ultrasound Scanner1.jpg';
+import defibrillatorsImage from '../assets/Defibrillators.png';
+import oxygenImage from '../assets/Oxygen.png';
+import ecgImage from '../assets/ECG .png';
+import operatingTablesImage from '../assets/Operating Tables.png';
+import ct1Image from '../assets/CT1.jpg';
+import ct2Image from '../assets/CT2.jpg';
+
+// Map equipment names to images
+const equipmentImageMap: { [key: string]: string } = {
+  'MRI Scanner': mriScannerImage,
+  'Ventilators': ventilatorsImage,
+  'Dialysis Machines': dialysisImage,
+  'X-Ray Machine': xrayImage,
+  'Patient Monitors': patientMonitorsImage,
+  'Surgical Lights': surgicalLightsImage,
+  'Ultrasound Machine': ultrasound1Image,
+  'Defibrillators': defibrillatorsImage,
+  'Laboratory Analyzer': ct1Image,
+  'Infusion Pumps': patientMonitorsImage,
+  'ECG Machine': ecgImage,
+  'Oxygen Concentrators': oxygenImage,
+  'Sterilization Equipment': ct2Image,
+  'Operating Tables': operatingTablesImage,
+  'Neonatal Incubators': patientMonitorsImage,
+};
+
 interface EquipmentItem {
   id: string;
   title: string;
@@ -34,18 +68,23 @@ export default function DonationGrid() {
       const approvedRequests = requests.filter(req => req.status === 'approved');
       
       // Map approved requests to equipment format
-      const mappedRequests: EquipmentItem[] = approvedRequests.map(req => ({
-        id: req.id,
-        title: req.equipmentName,
-        hospital: req.hospitalName,
-        desc: req.reason,
-        img: '/equipment-placeholder.jpg', // Use a placeholder or default image
-        goal: req.estimatedCost,
-        raised: req.approvalDetails?.currentRaised || 0, // Use current raised amount or 0
-        isApprovedRequest: true,
-        urgency: req.urgency,
-        beneficiaries: req.expectedBeneficiaries,
-      }));
+      const mappedRequests: EquipmentItem[] = approvedRequests.map(req => {
+        // Get the correct image from the map based on equipment name
+        const equipmentImage = equipmentImageMap[req.equipmentName] || ct1Image;
+        
+        return {
+          id: req.id,
+          title: req.equipmentName,
+          hospital: req.hospitalName,
+          desc: req.reason,
+          img: equipmentImage, // Use the mapped image
+          goal: req.estimatedCost,
+          raised: req.approvalDetails?.currentRaised || 0, // Use current raised amount or 0
+          isApprovedRequest: true,
+          urgency: req.urgency,
+          beneficiaries: req.expectedBeneficiaries,
+        };
+      });
       
       // Merge with static equipment data
       setAllEquipment([...mappedRequests, ...equipmentData]);
