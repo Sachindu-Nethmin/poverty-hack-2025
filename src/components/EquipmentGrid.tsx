@@ -1,5 +1,4 @@
 // src/components/EquipmentGrid.tsx
-import React from "react";
 
 export type EquipmentNeed = {
   id: string;

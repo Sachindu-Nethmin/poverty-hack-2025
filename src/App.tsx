@@ -1,9 +1,10 @@
 // src/App.tsx
 import { lazy, Suspense } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
+import { useAuth } from "./context/AuthContext";
 
 // Lazy load components that are below the fold
 const Partners = lazy(() => import("./components/Partners"));
@@ -15,9 +16,12 @@ const BlogList = lazy(() => import("./components/BlogList"));
 const Newsletter = lazy(() => import("./components/Newsletter"));
 const Footer = lazy(() => import("./components/Footer"));
 const PaymentPage = lazy(() => import("./components/PaymentPage"));
-const HospitalNeedForm = lazy(() => import("./components/HospitalNeedForm"));
-const AdminUserRegistrationForm = lazy(() => import("./components/AdminUserRegistrationForm"));
-import EquipmentGrid, { demoItems } from "./components/EquipmentGrid";
+const HospitalNeedFormPage = lazy(() => import("./components/HospitalNeedFormPage"));
+
+const RequestReviewPage = lazy(() => import("./components/RequestReviewPage"));
+const AuthLandingPage = lazy(() => import("./components/AuthLandingPage"));
+const HospitalDashboard = lazy(() => import("./components/HospitalDashboard"));
+const MinistryDashboard = lazy(() => import("./components/MinistryDashboard"));
 
 // Loading fallback component
 function LoadingSpinner() {
@@ -69,19 +73,49 @@ function HomePage() {
 }
 
 export default function App() {
+  const { user } = useAuth();
+
   return (
     <Routes>
-      <Route path="/" element={
-        <div className="min-h-screen flex flex-col bg-white text-gray-900">
-          <Header />
-          <main className="flex-1">
-            <HomePage />
-          </main>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Footer />
-          </Suspense>
-        </div>
+      {/* Auth Landing Page - Entry Point for All Users */}
+      <Route path="/auth" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <AuthLandingPage />
+        </Suspense>
       } />
+      
+      {/* Public Homepage - Shows Approved Requests Only */}
+      <Route path="/" element={
+        user ? (
+          <div className="min-h-screen flex flex-col bg-white text-gray-900">
+            <Header />
+            <main className="flex-1">
+              <HomePage />
+            </main>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Footer />
+            </Suspense>
+          </div>
+        ) : (
+          <Navigate to="/auth" replace />
+        )
+      } />
+      
+      {/* Hospital Dashboard */}
+      <Route path="/dashboard/hospital" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <HospitalDashboard />
+        </Suspense>
+      } />
+      
+      {/* Health Ministry Dashboard */}
+      <Route path="/dashboard/ministry" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <MinistryDashboard />
+        </Suspense>
+      } />
+      
+      {/* Payment Page */}
       <Route path="/payment/:equipmentId" element={
         <div className="min-h-screen flex flex-col bg-white text-gray-900">
           <Header />
@@ -95,12 +129,14 @@ export default function App() {
           </Suspense>
         </div>
       } />
+      
+      {/* Submit Hospital Need Request */}
       <Route path="/submit-need" element={
         <div className="min-h-screen flex flex-col bg-white text-gray-900">
           <Header />
           <main className="flex-1">
             <Suspense fallback={<LoadingSpinner />}>
-              <HospitalNeedForm />
+              <HospitalNeedFormPage />
             </Suspense>
           </main>
           <Suspense fallback={<LoadingSpinner />}>
@@ -108,25 +144,19 @@ export default function App() {
           </Suspense>
         </div>
       } />
-      <Route path="/admin/register" element={
-        <div className="min-h-screen flex flex-col bg-white text-gray-900">
-          <Header />
-          <main className="flex-1">
-            <Suspense fallback={<LoadingSpinner />}>
-              <AdminUserRegistrationForm />
-            </Suspense>
-          </main>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Footer />
-          </Suspense>
-        </div>
+      
+      {/* Admin Dashboard (Legacy - Redirects to Ministry Dashboard) */}
+      <Route path="/admin/dashboard" element={
+        <Navigate to="/dashboard/ministry" replace />
       } />
-      <Route path="/equipment" element={
+      
+      {/* Request Review Page */}
+      <Route path="/admin/requests/:requestId" element={
         <div className="min-h-screen flex flex-col bg-white text-gray-900">
           <Header />
           <main className="flex-1">
             <Suspense fallback={<LoadingSpinner />}>
-              <EquipmentGridWrapper />
+              <RequestReviewPage />
             </Suspense>
           </main>
           <Suspense fallback={<LoadingSpinner />}>
@@ -135,16 +165,5 @@ export default function App() {
         </div>
       } />
     </Routes>
-  );
-}
-
-// Small wrapper page to feed demo data into EquipmentGrid and wire Donate
-function EquipmentGridWrapper() {
-  const navigate = useNavigate();
-  return (
-    <EquipmentGrid
-      items={demoItems}
-      onDonateClick={(item) => navigate(`/payment/${item.id}`)}
-    />
   );
 }

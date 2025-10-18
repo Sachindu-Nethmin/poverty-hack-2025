@@ -1,20 +1,23 @@
 // src/components/Footer.tsx
-import logo from '../assets/logo .png';
+import logo from '../assets/Sri_Lanka.svg';
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <footer className="border-t bg-gradient-to-b from-gray-50 to-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Logo and Nav Links */}
         <div className="flex flex-col items-center gap-6 mb-8">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <img 
               src={logo} 
-              alt="Hope4Ever Logo" 
-              className="h-12 w-12 object-contain"
+              alt="Sri Lanka Health Logo" 
+              className="h-16 w-16 object-contain"
             />
-            <span className="font-bold text-2xl text-gray-900">Hope4Ever</span>
+            <div className="text-center md:text-left">
+              <span className="font-bold text-2xl text-gray-900 block">Public Health Support Portal</span>
+              <span className="text-sm text-emerald-600 font-semibold">Ministry of Health, Sri Lanka</span>
+            </div>
           </div>
 
           {/* Social Media Links */}
