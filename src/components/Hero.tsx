@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 import heroImage from '../assets/hero.png';
 import machineImage from '../assets/machine.png';
-import machine2Image from '../assets/machine3.png';
+import machine2Image from '../assets/machine 3.png';
 
 export default function Hero() {
   return (

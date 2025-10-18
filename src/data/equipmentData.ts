@@ -6,6 +6,7 @@ import glucometerImage from '../assets/Glucometer.jpg';
 import thermoImage from '../assets/thermo.jpg';
 import ultrasound1Image from '../assets/Ultrasound Scanner1.jpg';
 
+
 export type Equipment = {
   id: string;
   title: string;

@@ -1,13 +1,94 @@
 // src/components/PaymentPage.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getEquipmentById, formatCurrency, calculateProgress } from '../data/equipmentData';
+import type { HospitalNeedRequest } from '../types/request';
+
+// Import all equipment images
+import mriScannerImage from '../assets/MRI Scanner.png';
+import ventilatorsImage from '../assets/Ventilators.png';
+import dialysisImage from '../assets/Dialysis Machines.png';
+import xrayImage from '../assets/X-ray.jpg';
+import patientMonitorsImage from '../assets/Patient Monitors.png';
+import surgicalLightsImage from '../assets/Surgical Lights.png';
+import ultrasound1Image from '../assets/Ultrasound Scanner1.jpg';
+import defibrillatorsImage from '../assets/Defibrillators.png';
+import oxygenImage from '../assets/Oxygen.png';
+import ecgImage from '../assets/ECG .png';
+import operatingTablesImage from '../assets/Operating Tables.png';
+import ct1Image from '../assets/CT1.jpg';
+import ct2Image from '../assets/CT2.jpg';
+
+// Map equipment names to images
+const equipmentImageMap: { [key: string]: string } = {
+  'MRI Scanner': mriScannerImage,
+  'Ventilators': ventilatorsImage,
+  'Dialysis Machines': dialysisImage,
+  'X-Ray Machine': xrayImage,
+  'Patient Monitors': patientMonitorsImage,
+  'Surgical Lights': surgicalLightsImage,
+  'Ultrasound Machine': ultrasound1Image,
+  'Defibrillators': defibrillatorsImage,
+  'Laboratory Analyzer': ct1Image,
+  'Infusion Pumps': patientMonitorsImage,
+  'ECG Machine': ecgImage,
+  'Oxygen Concentrators': oxygenImage,
+  'Sterilization Equipment': ct2Image,
+  'Operating Tables': operatingTablesImage,
+  'Neonatal Incubators': patientMonitorsImage,
+};
 
 const presetAmounts = [1000, 5000, 10000, 25000, 50000, 100000];
 
 export default function PaymentPage() {
   const { equipmentId } = useParams<{ equipmentId: string }>();
-  const equipment = equipmentId ? getEquipmentById(equipmentId) : null;
+  const [equipment, setEquipment] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!equipmentId) {
+      setLoading(false);
+      return;
+    }
+
+    // First, try to get from static equipment data
+    const staticEquipment = getEquipmentById(equipmentId);
+    if (staticEquipment) {
+      setEquipment(staticEquipment);
+      setLoading(false);
+      return;
+    }
+
+    // If not found in static data, check localStorage for approved requests
+    const storedRequests = localStorage.getItem('hospitalRequests');
+    if (storedRequests) {
+      const requests: HospitalNeedRequest[] = JSON.parse(storedRequests);
+      const approvedRequest = requests.find(
+        req => req.id === equipmentId && req.status === 'approved'
+      );
+      
+      if (approvedRequest) {
+        // Get the correct image from the map based on equipment name
+        const equipmentImage = equipmentImageMap[approvedRequest.equipmentName] || ct1Image;
+        
+        // Convert HospitalNeedRequest to equipment format
+        setEquipment({
+          id: approvedRequest.id,
+          title: approvedRequest.equipmentName,
+          img: equipmentImage,
+          raised: approvedRequest.approvalDetails?.currentRaised || 0,
+          goal: approvedRequest.estimatedCost,
+          desc: approvedRequest.reason,
+          hospital: approvedRequest.hospitalName,
+          category: approvedRequest.equipmentCategory,
+          urgency: approvedRequest.urgency,
+          beneficiaries: approvedRequest.expectedBeneficiaries,
+          detailedDesc: approvedRequest.description,
+        });
+      }
+    }
+    setLoading(false);
+  }, [equipmentId]);
 
   // Form state
   const [amount, setAmount] = useState<number>(presetAmounts[2]);
@@ -19,11 +100,23 @@ export default function PaymentPage() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading equipment details...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!equipment) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Equipment Not Found</h2>
+          <p className="text-gray-600 mb-4">The equipment you're looking for doesn't exist or has been removed.</p>
           <Link to="/" className="text-emerald-600 hover:text-emerald-700 font-semibold">
             Return to Home
           </Link>
